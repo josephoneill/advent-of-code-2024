@@ -1,15 +1,6 @@
 import * as fs from "fs";
 import path from "path";
 
-enum Direction {
-  Down,
-  Right,
-  LeftDiagonal,
-  RightDiagonal
-}
-
-const desiredWordLength = 4;
-
 const rawInput = fs.readFileSync(
   path.resolve(__dirname, "./input.txt"),
   "utf-8"
