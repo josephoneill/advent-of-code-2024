@@ -41,14 +41,17 @@ for (let i = 0; i < updatesArray.length; i++) {
     // Get the list of pre-reqs for our current update
     const prereqs = map.get(page)!;
 
+    // Search for the first prereq
+    const firstPrereq = prereqs.find(prereqPage => pendingUpdatesSet.has(prereqPage));
+
     // No found prereq means update is valid
-    if (!prereqs.some(prereqPage => pendingUpdatesSet.has(prereqPage))) continue;
+    if (!firstPrereq) continue;
 
     // Flag to indicate our update line had at least one invalid update in it
     if (valid) valid = false;
 
-    // Search items in array past j for any items j cannot be before, find the first one, return the index
-    const prereqIndex = currUpdates.slice(j+1).findIndex(x => pendingUpdatesSet.has(x) && prereqs.some(a => a === x)) + j + 1;
+    // Get index of the first prereq (and move the current page behind that)
+    const prereqIndex = currUpdates.indexOf(firstPrereq);
 
     // Place current page after first found prereq
     currUpdates.splice(prereqIndex + 1, 0, currUpdates[j])
