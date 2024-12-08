@@ -117,7 +117,6 @@ while (
   while (isInBounds({ x, y }) && !grid[y][x].obstruction) {
     // We need to check possible obstruction
     if (obstructionExists(x, y, iterateDirection(guard.direction))) {
-      console.log(x, y, Direction[guard.direction]);
       count++;
     }
 
